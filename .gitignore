@@ -1,2 +1,4 @@
 *.user
 .conan/test_package/build
+.idea/
+cmake-build-*/
