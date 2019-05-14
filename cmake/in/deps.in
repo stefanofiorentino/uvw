@@ -24,3 +24,14 @@ ExternalProject_Add(
     INSTALL_COMMAND ""
     TEST_COMMAND ""
 )
+
+ExternalProject_Add(
+    evt-tls
+    GIT_REPOSITORY https://github.com/stefanofiorentino/evt-tls.git
+    GIT_TAG openssl-1.1.0g-2ubuntu4.3
+    SOURCE_DIR /home/fiorentinoing/devel/uvw/deps/evt-tls
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ""
+    TEST_COMMAND ""
+)

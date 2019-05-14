@@ -37,13 +37,14 @@ void listen(uvw::Loop &loop) {
             std::cout.write(event.data.get(), event.length) << std::endl;
             std::cout << "data length: " << event.length << std::endl;
 
-
-
             auto data_str = std::string{event.data.get()};
             const auto index = data_str.find("\r\n\r\n");
             if (index != std::string::npos)
             {
+                auto header = std::string{data_str.cbegin(), data_str.cbegin()+index};
+                std::cout << "Header: " << header << std::endl;
                 auto body = std::string{data_str.cbegin()+index+4, data_str.cend()};
+                std::cout << "Body: " << body << std::endl;
                 if (socket.writable())
                 {
                     char result[]= R"(HTTP/1.1 200 OK
@@ -53,7 +54,7 @@ void listen(uvw::Loop &loop) {
 }
 )";
                     auto result_len = std::strlen(result);
-                    socket.write(std::move(result), result_len);
+                    socket.write(result, result_len);
                 }
             }
         });
