@@ -17,7 +17,7 @@ set(
     uv_a
     Threads::Threads
     ${WINSOCK2}
-        mosquittopp
+    mosquitto
 #    ssl
 #    crypto
 )
@@ -34,7 +34,7 @@ target_include_directories(odr PRIVATE ${UVW_SRC_DIR})
 #        ${PROJECT_SOURCE_DIR}/deps/evt-tls/sample/libuv-tls
 #        )
 macro(ADD_UVW_TEST TEST_NAME TEST_SOURCE)
-    add_executable(${TEST_NAME} $<TARGET_OBJECTS:odr> ${TEST_SOURCE} uvw/mqtt.cpp)
+    add_executable(${TEST_NAME} $<TARGET_OBJECTS:odr> ${TEST_SOURCE})
     target_include_directories(${TEST_NAME} PRIVATE ${UVW_SRC_DIR})
     target_link_libraries(${TEST_NAME} PRIVATE ${COMMON_LINK_LIBS})
     add_test(NAME uvw_${TEST_NAME} COMMAND $<TARGET_FILE:${TEST_NAME}>)

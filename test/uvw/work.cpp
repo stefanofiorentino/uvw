@@ -2,8 +2,7 @@
 #include <condition_variable>
 #include <mutex>
 #include <uvw.hpp>
-#include "mqtt.h"
-
+#include "mosquitto.h"
 
 using namespace std::chrono_literals;
 
@@ -32,7 +31,6 @@ TEST(Work, RunTask) {
 
     req->on<uvw::WorkEvent>([&checkWorkEvent](const auto &, auto &) {
         ASSERT_FALSE(checkWorkEvent);
-        std::this_thread::sleep_for(10s);
         checkWorkEvent = true;
     });
 
@@ -71,13 +69,20 @@ TEST(Work, Cancellation) {
     ASSERT_TRUE(checkErrorEvent);
 }
 
+static bool checkWorkEvent = false;
+static void message_callback(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
+{
+    ASSERT_FALSE(checkWorkEvent);
+    checkWorkEvent = true;
+}
+
 TEST(Work, mosquitto) {
+    mosquitto_lib_init();
     auto loop = uvw::Loop::getDefault();
     auto checker = loop->resource<uvw::CheckHandle>();
-    auto checker_timer = loop->resource<uvw::TimerHandle>();
+    auto tick_timer = loop->resource<uvw::TimerHandle>();
     auto fake_delay_timer = loop->resource<uvw::TimerHandle>();
 
-    bool checkWorkEvent = false;
     bool checkTask = false;
 
     auto waiting_for_commands = loop->resource<uvw::WorkReq>([&checkTask]() {
@@ -89,41 +94,50 @@ TEST(Work, mosquitto) {
         FAIL();
     });
 
-    mqtt_client server("Work.mosquitto.server", "localhost", 60000, [&checkWorkEvent](std::string const &message)
-    {
-        ASSERT_FALSE(checkWorkEvent);
-        checkWorkEvent = true;
-    });
+    struct mosquitto *mosq_server = mosquitto_new("Work.mosquitto.server", true, 0);
 
-    waiting_for_commands->on<uvw::WorkEvent>([&checkWorkEvent, &server](const auto &, auto &waiting_for_commands_handler) {
+    waiting_for_commands->on<uvw::WorkEvent>([mosq_server](const auto &, auto &waiting_for_commands_handler) {
         ASSERT_FALSE(checkWorkEvent);
-
+        auto rc = mosquitto_connect(mosq_server, "localhost", 60000, 60);
+        if (rc)
+        {
+            FAIL();
+        }
+        mosquitto_message_callback_set(mosq_server, message_callback);
         int sub_mid;
-        std::string basicString = "TOPIC";
-        server.subscribe(&sub_mid, basicString.c_str());
+        mosquitto_subscribe(mosq_server, &sub_mid, "TOPIC", 0);
     });
 
-    checker->on<uvw::CheckEvent>([&checkWorkEvent, &server, &checker_timer, &fake_delay_timer](const auto &, auto &checker_handler) {
-        server.loop();
+    checker->on<uvw::CheckEvent>([&tick_timer, &fake_delay_timer, mosq_server](const auto &, auto &checker_handler) {
+        auto rc = mosquitto_loop(mosq_server, -1, 1);
+        if (rc)
+        {
+            FAIL();
+        }
         if(checkWorkEvent) {
             checker_handler.stop();
             checker_handler.close();
-            checker_timer->stop();
-            checker_timer->close();
+            tick_timer->stop();
+            tick_timer->close();
             fake_delay_timer->stop();
             fake_delay_timer->close();
         }
     });
 
     fake_delay_timer->on<uvw::TimerEvent>([](const auto &, auto &hndl) {
-        mqtt_client client("Work.mosquitto.client", "localhost", 60000, nullptr);
+        struct mosquitto *mosq_client = mosquitto_new("Work.mosquitto.client", true, 0);
+        auto rc = mosquitto_connect(mosq_client, "localhost", 60000, 60);
+        if (rc)
+        {
+            FAIL();
+        }
         int pub_mid;
-        std::string basicString = "TOPIC";
-        client.publish(&pub_mid, basicString.c_str(), 2, "OK");
-        client.loop();
+        mosquitto_publish(mosq_client,&pub_mid, "TOPIC", 2, "OK", 0, false);
+        mosquitto_loop(mosq_client, -1, 1);
+        mosquitto_destroy(mosq_client);
     });
 
-    checker_timer->start(uvw::TimerHandle::Time{100}, uvw::TimerHandle::Time{100});
+    tick_timer->start(uvw::TimerHandle::Time{100}, uvw::TimerHandle::Time{100});
     fake_delay_timer->start(uvw::TimerHandle::Time{5000}, uvw::TimerHandle::Time{0});
     waiting_for_commands->queue();
     checker->start();
@@ -131,4 +145,6 @@ TEST(Work, mosquitto) {
 
     ASSERT_TRUE(checkWorkEvent);
     ASSERT_TRUE(checkTask);
+    mosquitto_destroy(mosq_server);
+    mosquitto_lib_cleanup();
 }
