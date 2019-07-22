@@ -52,18 +52,17 @@ TEST(TCP, ReadWrite) {
     });
 
     server->on<uvw::ListenEvent>([](const uvw::ListenEvent &, uvw::TCPHandle &server_hdl) {
-        uv_tcp_t *tcp_client = static_cast<uv_tcp_t *>(malloc(sizeof(*tcp_client))); //freed on uv_close callback
-        uv_tcp_init(uv_default_loop(), tcp_client);
-        if (uv_accept(reinterpret_cast<uv_stream_t *>(server_hdl.raw()), reinterpret_cast<uv_stream_t *>(tcp_client))) {
+        std::unique_ptr<uv_tcp_t> tcp_client_ptr = std::make_unique<uv_tcp_t>();
+        uv_tcp_init(uv_default_loop(), tcp_client_ptr.get());
+        if (uv_accept(reinterpret_cast<uv_stream_t *>(server_hdl.raw()), reinterpret_cast<uv_stream_t *>(tcp_client_ptr.get()))) {
             return;
         }
 
-        uv_tls_t *tls_client = static_cast<uv_tls_t *>(malloc(sizeof(*tls_client))); //freed on uv_close callback
-        if(0 > uv_tls_init(reinterpret_cast<evt_ctx_t *>(server_hdl.data().get()), tcp_client, tls_client)) {
-            free(tls_client);
+        std::unique_ptr<uv_tls_t > tls_client_ptr = std::make_unique<uv_tls_t>();
+        if(0 > uv_tls_init(reinterpret_cast<evt_ctx_t *>(server_hdl.data().get()), tcp_client_ptr.release(), tls_client_ptr.get())) {
             return;
         }
-        uv_tls_accept(tls_client, on_uv_handshake);
+        uv_tls_accept(tls_client_ptr.release(), on_uv_handshake);
     });
 
     server->bind(address, port);

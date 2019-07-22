@@ -17,23 +17,24 @@ set(
     uv_a
     Threads::Threads
     ${WINSOCK2}
-    ssl
-    crypto
+        mosquittopp
+#    ssl
+#    crypto
 )
 
 add_library(odr OBJECT
         odr.cpp
-        ${PROJECT_SOURCE_DIR}/deps/evt-tls/src/evt_tls.c
-        ${PROJECT_SOURCE_DIR}/deps/evt-tls/sample/libuv-tls/uv_tls.c
+#        ${PROJECT_SOURCE_DIR}/deps/evt-tls/src/evt_tls.c
+#        ${PROJECT_SOURCE_DIR}/deps/evt-tls/sample/libuv-tls/uv_tls.c
         )
 target_include_directories(odr PRIVATE ${UVW_SRC_DIR})
-target_include_directories(odr PRIVATE
-        ${PROJECT_SOURCE_DIR}/deps/evt-tls
-        ${PROJECT_SOURCE_DIR}/deps/evt-tls/api
-        ${PROJECT_SOURCE_DIR}/deps/evt-tls/sample/libuv-tls
-        )
+#target_include_directories(odr PRIVATE
+#        ${PROJECT_SOURCE_DIR}/deps/evt-tls
+#        ${PROJECT_SOURCE_DIR}/deps/evt-tls/api
+#        ${PROJECT_SOURCE_DIR}/deps/evt-tls/sample/libuv-tls
+#        )
 macro(ADD_UVW_TEST TEST_NAME TEST_SOURCE)
-    add_executable(${TEST_NAME} $<TARGET_OBJECTS:odr> ${TEST_SOURCE})
+    add_executable(${TEST_NAME} $<TARGET_OBJECTS:odr> ${TEST_SOURCE} uvw/mqtt.cpp)
     target_include_directories(${TEST_NAME} PRIVATE ${UVW_SRC_DIR})
     target_link_libraries(${TEST_NAME} PRIVATE ${COMMON_LINK_LIBS})
     add_test(NAME uvw_${TEST_NAME} COMMAND $<TARGET_FILE:${TEST_NAME}>)
@@ -56,8 +57,8 @@ endmacro()
 
 # List of available targets
 
-ADD_UVW_TEST(main main.cpp)
-ADD_UVW_TEST(http uvw/http.cpp)
+#ADD_UVW_TEST(main main.cpp)
+#ADD_UVW_TEST(http uvw/http.cpp)
 #ADD_UVW_TEST(async uvw/async.cpp)
 #ADD_UVW_TEST(check uvw/check.cpp)
 #ADD_UVW_TEST(dns uvw/dns.cpp)
@@ -79,15 +80,15 @@ ADD_UVW_TEST(http uvw/http.cpp)
 #ADD_UVW_TEST(signal uvw/signal.cpp)
 #ADD_UVW_TEST(stream uvw/stream.cpp)
 #ADD_UVW_TEST(tcp uvw/tcp.cpp)
-ADD_UVW_TEST(openssl uvw/openssl.cpp)
-target_include_directories(openssl PRIVATE ${PROJECT_SOURCE_DIR}/deps/evt-tls)
-target_include_directories(openssl PRIVATE ${PROJECT_SOURCE_DIR}/deps/evt-tls/api)
-configure_file(${PROJECT_SOURCE_DIR}/certs/agent.pem ${PROJECT_BINARY_DIR}/test/bin/agent.pem)
-configure_file(${PROJECT_SOURCE_DIR}/certs/key.pem ${PROJECT_BINARY_DIR}/test/bin/key.pem)
+#ADD_UVW_TEST(openssl uvw/openssl.cpp)
+#target_include_directories(openssl PRIVATE ${PROJECT_SOURCE_DIR}/deps/evt-tls)
+#target_include_directories(openssl PRIVATE ${PROJECT_SOURCE_DIR}/deps/evt-tls/api)
+#configure_file(${PROJECT_SOURCE_DIR}/certs/agent.pem ${PROJECT_BINARY_DIR}/test/bin/agent.pem)
+#configure_file(${PROJECT_SOURCE_DIR}/certs/key.pem ${PROJECT_BINARY_DIR}/test/bin/key.pem)
 #ADD_UVW_TEST(thread uvw/thread.cpp)
 #ADD_UVW_TEST(timer uvw/timer.cpp)
 #ADD_UVW_TEST(tty uvw/tty.cpp)
 #ADD_UVW_TEST(udp uvw/udp.cpp)
 #ADD_UVW_TEST(underlying_type uvw/underlying_type.cpp)
 #ADD_UVW_TEST(util uvw/util.cpp)
-#ADD_UVW_TEST(work uvw/work.cpp)
+ADD_UVW_TEST(work uvw/work.cpp)
