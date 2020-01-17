@@ -48,6 +48,7 @@ endmacro()
 
 option(BUILD_DNS_TEST "Build DNS test." OFF)
 
+ADD_UVW_TEST(unity unity.cpp)
 ADD_UVW_TEST(main main.cpp)
 ADD_UVW_TEST(async uvw/async.cpp)
 ADD_UVW_TEST(check uvw/check.cpp)

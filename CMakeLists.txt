@@ -92,6 +92,11 @@ if(BUILD_TESTING)
     set(BUILD_TESTING ON)
     enable_testing()
 
+    option(CODE_COVERAGE "Activate code coverage on debug build" ON)
+    if (CODE_COVERAGE)
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage --coverage")
+    endif (CODE_COVERAGE)
+
     add_subdirectory(test)
 endif()
 
