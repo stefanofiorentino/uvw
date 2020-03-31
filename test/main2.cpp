@@ -3,7 +3,6 @@
 #include <iostream>
 #include <memory>
 #include <chrono>
-#include <thread>
 
 int main() {
     using namespace std::chrono_literals;
@@ -11,30 +10,24 @@ int main() {
     // get the default loop
     auto loop = uvw::Loop::getDefault();
 
-    // create a variable for a thread outside of the following scope (next line)
-    std::thread loopThread;
+    // to keep loop running
+    auto idle_handle = loop->resource<uvw::IdleHandle>();
+    idle_handle->start();
 
     // here an async handle is created
-    auto asyncHandle = loop->resource<uvw::AsyncHandle>();
-
-    asyncHandle->on<uvw::CloseEvent>([](auto const&, auto&){
-        std::cout << "closing the async handler" << std::endl;
+    auto async_handle = loop->resource<uvw::AsyncHandle>();
+    async_handle->on<uvw::CloseEvent>([loop](auto const&, auto&){
+        loop->stop();
     });
 
-    // now the thread for the loop gets started
-    loopThread = std::thread{[loop] {
-        loop->run();
-    }};
-
-    // just a little delay
-    std::this_thread::sleep_for(1s);
-
-    asyncHandle->close();
+    auto thread_handle = loop->resource<uvw::Thread>([](std::shared_ptr<void> data){
+        auto async_handle = std::static_pointer_cast<uvw::AsyncHandle>(data);
+        uv_sleep(1000);
+        async_handle->close();
+    }, async_handle);
+    thread_handle->run();
 
 
-    // joining the thread (here, the std::this_thread blocks because loopThread will not terminate)
-    if(loopThread.joinable()) {
-        loopThread.join();
-    }
+    loop->run();
     return 0;
 }
