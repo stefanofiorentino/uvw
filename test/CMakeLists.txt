@@ -80,6 +80,7 @@ endfunction()
 option(BUILD_DNS_TEST "Build DNS test." OFF)
 
 ADD_UVW_TEST(main main.cpp)
+ADD_UVW_TEST(main2 main2.cpp)
 ADD_UVW_TEST(async uvw/async.cpp)
 ADD_UVW_TEST(check uvw/check.cpp)
 ADD_UVW_TEST(emitter uvw/emitter.cpp)
