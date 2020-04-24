@@ -27,3 +27,27 @@ TEST(Resource, Functionalities) {
     resource->close();
     loop->run();
 }
+
+struct context_t{
+    int question() const {
+        return answer;
+    }
+private:
+    static constexpr int answer = 42;
+};
+
+TEST(Resource, UserDataByAliasSharedPtr) {
+    auto loop = uvw::Loop::getDefault();
+    auto resource = loop->resource<uvw::AsyncHandle>();
+
+    auto context = std::make_unique<context_t>();
+    resource->data(std::make_shared<context_t>(*context), context.get());
+    resource->on<uvw::AsyncEvent>([](auto const&, auto &hndl){
+        auto context = hndl.template data<context_t>();
+        ASSERT_EQ(42, context->question());
+        hndl.close();
+    });
+
+    resource->send();
+    loop->run();
+}

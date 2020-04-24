@@ -63,6 +63,15 @@ public:
         userData = std::move(uData);
     }
 
+    /**
+      * @brief Sets arbitrary non-owning data by aliasing. `uvw` won't use this field in any case.
+      * @param uData User-defined arbitrary data.
+      */
+    template<typename R>
+    void data(std::shared_ptr<R> uData, R *r) {
+        userData = std::shared_ptr<void>(std::move(uData), r);
+    }
+
 private:
     std::shared_ptr<void> userData{nullptr};
     std::shared_ptr<void> sPtr{nullptr};
