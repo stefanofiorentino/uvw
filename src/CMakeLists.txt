@@ -52,6 +52,11 @@ function(add_uvw_library LIB_NAME)
         target_link_libraries(${LIB_NAME} PUBLIC $<$<CONFIG:Debug>:-fsanitize=undefined>)
     endif()
 
+    if(VISIBILITY_HIDDEN)
+        target_compile_options(${LIB_NAME} INTERFACE $<$<CONFIG:Debug>:-fvisibility=hidden>)
+        target_link_libraries(${LIB_NAME} INTERFACE $<$<CONFIG:Debug>:-fvisibility=hidden>)
+    endif()
+
     if(HAS_LIBCPP)
         target_compile_options(${LIB_NAME} BEFORE PUBLIC -stdlib=libc++)
     endif()

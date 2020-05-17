@@ -39,6 +39,7 @@ message("*")
 option(USE_LIBCPP "Use libc++ by adding -stdlib=libc++ flag if availbale." ON)
 option(USE_ASAN "Use address sanitizer by adding -fsanitize=address -fno-omit-frame-pointer flags" OFF)
 option(USE_UBSAN "Use address sanitizer by adding -fsanitize=undefined -fno-sanitize-recover=all -fno-omit-frame-pointer flags" OFF)
+option(VISIBILITY_HIDDEN "Activate GCC flags visibility hidden" OFF)
 option(BUILD_UVW_LIBS "Prepare targets for static and shared libraries rather than for a header-only library." OFF)
 
 #
@@ -121,6 +122,11 @@ else()
     if(USE_UBSAN)
         target_compile_options(uvw INTERFACE $<$<CONFIG:Debug>:-fsanitize=undefined -fno-sanitize-recover=all -fno-omit-frame-pointer>)
         target_link_libraries(uvw INTERFACE $<$<CONFIG:Debug>:-fsanitize=undefined>)
+    endif()
+
+    if(VISIBILITY_HIDDEN)
+        target_compile_options(uvw INTERFACE $<$<CONFIG:Debug>:-fvisibility=hidden>)
+        target_link_libraries(uvw INTERFACE $<$<CONFIG:Debug>:-fvisibility=hidden>)
     endif()
 
     if(HAS_LIBCPP)
