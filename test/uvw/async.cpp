@@ -8,7 +8,9 @@ TEST(Async, Send) {
 
     bool checkAsyncEvent = false;
 
-    handle->on<uvw::ErrorEvent>([](auto &&...) { FAIL(); });
+    handle->on<uvw::ErrorEvent>([](auto &&...) {
+        FAIL();
+    });
 
     handle->on<uvw::AsyncEvent>([&checkAsyncEvent](const auto &, auto &hndl) {
         ASSERT_FALSE(checkAsyncEvent);
