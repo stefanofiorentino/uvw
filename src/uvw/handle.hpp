@@ -8,6 +8,9 @@
 #include <uv.h>
 #include "resource.hpp"
 #include "util.h"
+#include "config.h"
+
+UVW_MSVC_WARNING_PUSH_DISABLE_DLLINTERFACE();
 
 
 namespace uvw {
@@ -18,7 +21,7 @@ namespace uvw {
  *
  * It will be emitted by the handles according with their functionalities.
  */
-struct CloseEvent {};
+struct UVW_EXTERN CloseEvent {};
 
 
 /**
@@ -273,5 +276,16 @@ public:
 
 
 }
+
+struct fake_handle_t { void *data; };
+
+struct UVW_EXTERN FakeHandle: uvw::Handle<FakeHandle, fake_handle_t> {
+    using Handle::Handle;
+
+    template<typename... Args>
+    bool init(Args&&...) { return initialize([](auto...){ return true; }); }
+};
+
+UVW_MSVC_WARNING_POP();
 
 #endif // UVW_HANDLE_INCLUDE_H

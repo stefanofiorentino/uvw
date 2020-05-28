@@ -12,6 +12,15 @@
 #include <list>
 #include <uv.h>
 
+#include "config.h"
+
+#include "../lib/type_factory.h"
+#ifndef UVW_AS_LIB
+#include "../lib/type_factory.cpp"
+#endif
+
+UVW_MSVC_WARNING_PUSH_DISABLE_DLLINTERFACE();
+
 
 namespace uvw {
 
@@ -21,7 +30,7 @@ namespace uvw {
  *
  * Custom wrapper around error constants of `libuv`.
  */
-struct ErrorEvent {
+struct UVW_EXTERN ErrorEvent {
     template<typename U, typename = std::enable_if_t<std::is_integral_v<U>>>
     explicit ErrorEvent(U val) noexcept
         : ec{static_cast<int>(val)}
@@ -157,20 +166,9 @@ class Emitter {
         ListenerList onL{};
     };
 
-    static std::size_t next_type() noexcept {
-        static std::size_t counter = 0;
-        return counter++;
-    }
-
-    template<typename>
-    static std::size_t event_type() noexcept {
-        static std::size_t value = next_type();
-        return value;
-    }
-
     template<typename E>
     Handler<E> & handler() noexcept {
-        std::size_t type = event_type<E>();
+        std::size_t type = details::type_factory<T>::template event_type<E>();
 
         if(!(type < handlers.size())) {
             handlers.resize(type+1);
@@ -190,6 +188,14 @@ protected:
     }
 
 public:
+    Emitter() = default;
+    Emitter(Emitter &&) = default;
+    Emitter & operator=(Emitter &&) = default;
+
+    // These must be deleted because MSVC try to export them with UVW_EXPORT
+    Emitter(const Emitter&) = delete;
+    Emitter& operator=(const Emitter&) = delete;
+
     template<typename E>
     using Listener = typename Handler<E>::Listener;
 
@@ -292,7 +298,7 @@ public:
      */
     template<typename E>
     bool empty() const noexcept {
-        std::size_t type = event_type<E>();
+        std::size_t type = details::type_factory<T>::template event_type<E>();
 
         return (!(type < handlers.size()) ||
                 !handlers[type] ||
@@ -316,9 +322,16 @@ private:
 
 }
 
+struct UVW_EXTERN FakeEvent { };
+
+struct UVW_EXTERN TestEmitter: uvw::Emitter<TestEmitter> {
+    void emit() { publish(FakeEvent{}); }
+};
 
 #ifndef UVW_AS_LIB
 #include "emitter.cpp"
 #endif
+
+UVW_MSVC_WARNING_POP();
 
 #endif // UVW_EMITTER_INCLUDE_H
