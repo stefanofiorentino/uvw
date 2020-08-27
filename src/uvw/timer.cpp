@@ -43,5 +43,10 @@ UVW_INLINE TimerHandle::Time TimerHandle::repeat() {
     return Time{uv_timer_get_repeat(get())};
 }
 
+template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Connection<ErrorEvent>;
+template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Connection<TimerEvent>;
+template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;
+template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Handler<TimerEvent>;
+
 
 }

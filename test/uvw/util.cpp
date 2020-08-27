@@ -9,7 +9,7 @@ struct tag { using type = T; };
 
 
 TEST(Util, UnscopedFlags) {
-    enum class UnscopedEnum { FOO = 1, BAR = 2, BAZ = 4, QUUX = 8 };
+    using uvw::testing_facilities::UnscopedEnum;
 
     uvw::Flags<UnscopedEnum> flags{};
 
@@ -41,7 +41,7 @@ TEST(Util, UnscopedFlags) {
 
 
 TEST(Util, ScopedFlags) {
-    enum class ScopedEnum { FOO = 1, BAR = 2, BAZ = 4, QUUX = 8 };
+    using uvw::testing_facilities::ScopedEnum;
 
     uvw::Flags<ScopedEnum> flags{};
 

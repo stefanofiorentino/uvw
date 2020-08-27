@@ -1,6 +1,9 @@
 name: build
+
 on: [push, pull_request]
+
 jobs:
+
   windows:
     timeout-minutes: 60
     runs-on: windows-latest
@@ -8,7 +11,7 @@ jobs:
     strategy:
       matrix:
         generator: [Visual Studio 16 2019]
-        mode: [-DBUILD_UVW_LIBS=ON, -DBUILD_UVW_LIBS=OFF]
+        mode: [-DBUILD_UVW_LIBS=ON]
 
     steps:
     - uses: actions/checkout@v1
@@ -16,4 +19,4 @@ jobs:
       working-directory: build
       run: |
         cmake ${{ matrix.mode }} -DBUILD_TESTING=ON -Dlibuv_buildtests=OFF -DCMAKE_CXX_FLAGS=/W1 -G"${{ matrix.generator }}" ..
-        cmake --build . --target async idle -j 4
+        cmake --build . -j 2

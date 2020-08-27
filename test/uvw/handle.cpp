@@ -1,17 +1,7 @@
 #include <gtest/gtest.h>
 #include <uvw.hpp>
 
-
-struct UVW_EXTERN fake_handle_t { void *data; };
-
-
-struct UVW_EXTERN FakeHandle: uvw::Handle<FakeHandle, fake_handle_t, uvw::CloseEvent, uvw::ErrorEvent> {
-    using Handle<FakeHandle, fake_handle_t, uvw::CloseEvent, uvw::ErrorEvent>::Handle;
-
-    template<typename... Args>
-    bool init(Args&&...) { return initialize([](auto...){ return true; }); }
-};
-
+struct FakeHandle;
 
 TEST(Handle, Functionalities) {
     auto loop = uvw::Loop::getDefault();

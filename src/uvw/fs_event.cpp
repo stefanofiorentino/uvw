@@ -50,4 +50,8 @@ UVW_INLINE std::string FsEventHandle::path() noexcept {
     return details::tryRead(&uv_fs_event_getpath, get());
 }
 
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::ErrorEvent&, class uvw::FsEventHandle&)> > > > > uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::FsEventHandle&)>);
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::FsEventEvent&, class uvw::FsEventHandle&)> > > > > uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FsEventEvent>::on(class std::function<void(struct uvw::FsEventEvent&, class uvw::FsEventHandle&)>);
+template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsEventEvent>;
 }

@@ -346,5 +346,10 @@ UVW_INLINE void Utilities::sleep(unsigned int msec) noexcept {
     uv_sleep(msec);
 }
 
+template uvw::details::UVTypeWrapper<int>::UVTypeWrapper<int>(void);
+template bool uvw::details::UVTypeWrapper<int>::operator==(struct uvw::details::UVTypeWrapper<int>)const noexcept;
+template struct UVW_EXTERN uvw::Flags<uvw::testing_facilities::UnscopedEnum>;
+template struct UVW_EXTERN uvw::Flags<uvw::testing_facilities::ScopedEnum>;
+
 
 }

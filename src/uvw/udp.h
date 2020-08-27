@@ -9,7 +9,7 @@
 #include <string>
 #include <uv.h>
 #include "request.hpp"
-#include "handle.hpp"
+#include "handle.h"
 #include "util.h"
 #include "config.h"
 
@@ -65,7 +65,7 @@ public:
     using Deleter = void(*)(char *);
 
     SendReq(ConstructorAccess ca, std::shared_ptr<Loop> loop, std::unique_ptr<char[], Deleter> dt, unsigned int len) :
-            Request<SendReq, uv_udp_send_t, SendEvent, ErrorEvent>{ca, std::move(loop)}, data{std::move(dt)},
+        Request<SendReq, uv_udp_send_t, SendEvent, ErrorEvent>{ ca, std::move(loop) }, data{ std::move(dt) },
             buf{uv_buf_init(data.get(), len)}
     {}
 

@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include <uv.h>
-#include "handle.hpp"
+#include "handle.h"
 #include "stream.h"
 #include "util.h"
 #include "loop.h"
@@ -45,6 +45,9 @@ enum class UVStdIOFlags: std::underlying_type_t<uv_stdio_flags> {
 
 
 }
+
+
+template struct UVW_EXTERN Flags<enum details::UVStdIOFlags>;
 
 
 /**

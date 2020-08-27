@@ -28,5 +28,10 @@ UVW_INLINE void CheckHandle::stop() {
     invoke(&uv_check_stop, get());
 }
 
+template struct UVW_EXTERN Emitter<CheckHandle, CheckEvent, CloseEvent, ErrorEvent>::Connection<CheckEvent>;
+template struct UVW_EXTERN Emitter<CheckHandle, CheckEvent, CloseEvent, ErrorEvent>::Connection<ErrorEvent>;
+template struct UVW_EXTERN Emitter<CheckHandle, CheckEvent, CloseEvent, ErrorEvent>::Handler<CheckEvent>;
+template struct UVW_EXTERN Emitter<CheckHandle, CheckEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;
+
 
 }

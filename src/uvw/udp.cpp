@@ -152,8 +152,7 @@ UVW_INLINE void UDPHandle::send(Addr addr, std::unique_ptr<char[]> data, unsigne
 
 UVW_INLINE void UDPHandle::send(const sockaddr &addr, char *data, unsigned int len) {
     auto req = loop().resource<details::SendReq>(
-            std::unique_ptr<char[], details::SendReq::Deleter>{data, [](char *) {
-            }}, len);
+            std::unique_ptr<char[], details::SendReq::Deleter>{data, [](char *) {}}, len);
 
     auto listener = [ptr = shared_from_this()](const auto &event, const auto &) {
         ptr->publish(event);
@@ -315,5 +314,11 @@ template int UDPHandle::trySend<IPv6>(Addr, char *, unsigned int);
 template void UDPHandle::recv<IPv4>();
 template void UDPHandle::recv<IPv6>();
 
-
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::ErrorEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::UDPHandle&)>);
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::SendEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::SendEvent>::once(class std::function<void(struct uvw::SendEvent&, class uvw::UDPHandle&)>);
+template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::SendEvent>;
+template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::UDPDataEvent>;
+template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::UDPDataEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::UDPDataEvent>::once(class std::function<void(struct uvw::UDPDataEvent&, class uvw::UDPHandle&)>);
+template uvw::Flags<enum uvw::details::UVUDPFlags>::Flags<enum uvw::details::UVUDPFlags>(void);
 }

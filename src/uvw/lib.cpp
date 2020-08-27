@@ -31,5 +31,6 @@ UVW_INLINE const char *SharedLib::error() const noexcept {
     return uv_dlerror(get());
 }
 
+template UVW_EXTERN Loop& uvw::UnderlyingType<SharedLib, uv_lib_t>::loop() const noexcept;
 
 }

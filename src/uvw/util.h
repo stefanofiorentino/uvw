@@ -806,7 +806,7 @@ struct UVW_EXTERN Utilities {
      * @param dir The working directory to be set.
      * @return True in case of success, false otherwise.
      */
-    static bool chdir(const std::string &dir) noexcept;
+    static bool chdir(const std::string& dir) noexcept;
 
     /**
      * @brief Cross-platform implementation of
@@ -822,6 +822,10 @@ struct UVW_EXTERN Utilities {
     static void sleep(unsigned int msec) noexcept;
 };
 
+namespace testing_facilities {
+    enum class UnscopedEnum { FOO = 1, BAR = 2, BAZ = 4, QUUX = 8 };
+    enum class ScopedEnum { FOO = 1, BAR = 2, BAZ = 4, QUUX = 8 };
+}
 
 }
 

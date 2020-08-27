@@ -9,7 +9,7 @@
 #include <memory>
 #include <uv.h>
 #include "request.hpp"
-#include "handle.hpp"
+#include "handle.h"
 #include "loop.h"
 #include "config.h"
 
@@ -99,10 +99,12 @@ class UVW_EXTERN WriteReq final: public Request<WriteReq<Deleter>, uv_write_t, W
     using ConstructorAccess = typename Request<WriteReq<Deleter>, uv_write_t, WriteEvent, ErrorEvent>::ConstructorAccess;
 
 public:
-    WriteReq(ConstructorAccess ca, std::shared_ptr<Loop> loop, std::unique_ptr<char[], Deleter> dt, unsigned int len)
+    explicit WriteReq(ConstructorAccess ca, std::shared_ptr<Loop> loop) : Request<WriteReq<Deleter>, uv_write_t, WriteEvent, ErrorEvent>{ ca, std::move(loop) }
+    {}
+    explicit WriteReq(ConstructorAccess ca, std::shared_ptr<Loop> loop, std::unique_ptr<char[], Deleter> &&dt, unsigned int len)
         : Request<WriteReq<Deleter>, uv_write_t, WriteEvent, ErrorEvent>{ca, std::move(loop)},
-          data{std::move(dt)},
-          buf{uv_buf_init(data.get(), len)}
+        data{ std::move(dt) },
+            buf{uv_buf_init(data.get(), len)}
     {}
 
     void write(uv_stream_t *handle) {
@@ -282,7 +284,7 @@ public:
      * @param len The lenght of the submitted data.
      */
     void write(char *data, unsigned int len) {
-        auto req = this->loop().template resource<details::WriteReq<void(*)(char *)>>(std::unique_ptr<char[], void(*)(char *)>{data, [](char *) {}}, len);
+        auto req =  this->loop().template resource<details::WriteReq<void(*)(char*)>>(std::unique_ptr<char[], void(*)(char*)>{data, [](char*) {}}, len);
         auto listener = [ptr = this->shared_from_this()](const auto &event, const auto &) {
             ptr->publish(event);
         };
@@ -344,14 +346,14 @@ public:
      */
     template<typename S>
     void write(S &send, char *data, unsigned int len) {
-        auto req = this->loop().template resource<details::WriteReq<void(*)(char *)>>(std::unique_ptr<char[], void(*)(char *)>{data, [](char *) {}}, len);
+        /*auto req = this->loop().template resource<details::WriteReq<void(*)(char *)>>(std::unique_ptr<char[], void(*)(char *)>{data, [](char *) {}}, len);
         auto listener = [ptr = this->shared_from_this()](const auto &event, const auto &) {
             ptr->publish(event);
         };
 
         req->template once<ErrorEvent>(listener);
         req->template once<WriteEvent>(listener);
-        req->write(this->template get<uv_stream_t>(), this->template get<uv_stream_t>(send));
+        req->write(this->template get<uv_stream_t>(), this->template get<uv_stream_t>(send));*/
     }
 
     /**

@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <memory>
 #include <uv.h>
-#include "handle.hpp"
+#include "handle.h"
 #include "util.h"
 #include "config.h"
 

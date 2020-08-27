@@ -76,5 +76,25 @@ UVW_INLINE TTYHandle::VTermState TTYHandle::vtermState() const noexcept {
     return VTermState{state};
 }
 
+template struct UVW_EXTERN Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
+::Connection<struct WriteEvent>;
+template struct UVW_EXTERN Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
+::Connection<struct ErrorEvent>;
+
+ 
+     
+template void
+Emitter<TTYHandle, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>
+::Handler<WriteEvent>
+::publish(WriteEvent, TTYHandle&);
+
+
+template Emitter<class TTYHandle, struct ConnectEvent, struct DataEvent, struct EndEvent, struct ListenEvent, struct WriteEvent, struct ShutdownEvent, struct CloseEvent, struct ErrorEvent>
+::Connection<struct WriteEvent>;
+
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct WriteEvent&, class TTYHandle&)> > > > >
+        Emitter<class TTYHandle, struct ConnectEvent, struct DataEvent, struct EndEvent, struct ListenEvent, struct WriteEvent, struct ShutdownEvent, struct CloseEvent, struct ErrorEvent>
+        ::Handler<struct WriteEvent>::on(class std::function<void(struct WriteEvent&, class TTYHandle&)>);
+
 
 }

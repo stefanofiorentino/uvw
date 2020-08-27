@@ -41,6 +41,10 @@ option(USE_ASAN "Use address sanitizer by adding -fsanitize=address -fno-omit-fr
 option(USE_UBSAN "Use address sanitizer by adding -fsanitize=undefined -fno-sanitize-recover=all -fno-omit-frame-pointer flags" OFF)
 option(BUILD_UVW_LIBS "Prepare targets for static library rather than for a header-only library." OFF)
 
+if (WIN32)
+add_definitions(/bigobj)
+endif()
+
 #
 # Compiler stuff
 #

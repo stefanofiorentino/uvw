@@ -12,7 +12,6 @@
 
 UVW_MSVC_WARNING_PUSH_DISABLE_DLLINTERFACE();
 
-
 namespace uvw {
 
 
@@ -276,6 +275,16 @@ public:
 
 
 }
+
+struct fake_handle_t { void* data; };
+
+
+struct FakeHandle : uvw::Handle<FakeHandle, fake_handle_t, uvw::CloseEvent, uvw::ErrorEvent> {
+    using Handle<FakeHandle, fake_handle_t, uvw::CloseEvent, uvw::ErrorEvent>::Handle;
+
+    template<typename... Args>
+    bool init(Args&&...) { return initialize([](auto...) { return true; }); }
+};
 
 UVW_MSVC_WARNING_POP();
 

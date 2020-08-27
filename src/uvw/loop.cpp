@@ -146,6 +146,6 @@ UVW_INLINE uv_loop_t *Loop::raw() noexcept {
 template bool Loop::run<Loop::Mode::DEFAULT>() noexcept;
 template bool Loop::run<Loop::Mode::ONCE>() noexcept;
 template bool Loop::run<Loop::Mode::NOWAIT>() noexcept;
-
-
+template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::ErrorEvent&, class uvw::Loop&)> > > > > uvw::Emitter<class uvw::Loop, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::Loop&)>);
+template struct UVW_EXTERN uvw::Emitter<class uvw::Loop, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
 }

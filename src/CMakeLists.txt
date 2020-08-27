@@ -13,6 +13,7 @@ function(add_uvw_library LIB_NAME)
             uvw/fs.cpp
             uvw/fs_event.cpp
             uvw/fs_poll.cpp
+            uvw/handle.cpp
             uvw/idle.cpp
             uvw/lib.cpp
             uvw/loop.cpp
@@ -28,8 +29,7 @@ function(add_uvw_library LIB_NAME)
             uvw/tty.cpp
             uvw/udp.cpp
             uvw/util.cpp
-            uvw/work.cpp
-    )
+            uvw/work.cpp)
 
     set_target_properties(${LIB_NAME} PROPERTIES POSITION_INDEPENDENT_CODE 1)
     target_compile_definitions(${LIB_NAME} PUBLIC UVW_AS_LIB)

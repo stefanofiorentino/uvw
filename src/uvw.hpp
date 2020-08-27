@@ -6,7 +6,7 @@
 #include "uvw/fs.h"
 #include "uvw/fs_event.h"
 #include "uvw/fs_poll.h"
-#include "uvw/handle.hpp"
+#include "uvw/handle.h"
 #include "uvw/idle.h"
 #include "uvw/lib.h"
 #include "uvw/loop.h"
