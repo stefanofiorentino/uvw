@@ -13,7 +13,7 @@ public:
     uv_buf_t allocate(std::size_t suggested) override
     {
         use_my_allocator = true;
-        return {buf,1024};
+        return  uv_buf_init(buf, 1024);
     }
     void deallocate(char*) override
     {
