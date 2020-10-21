@@ -18,14 +18,16 @@ namespace uvw {
     }
     
     template void details::WriteReq<struct std::default_delete<char[]> >::write(struct uv_stream_s*);
-    template details::WriteReq<struct std::default_delete<char[]> >::WriteReq<struct std::default_delete<char[]> >(struct UnderlyingType<class details::WriteReq<struct std::default_delete<char[]> >, struct uv_write_s>::ConstructorAccess, class std::shared_ptr<class Loop>, class std::unique_ptr<char[]>&&, unsigned int);
+    template details::WriteReq<struct std::default_delete<char[]> >::WriteReq(struct UnderlyingType<class details::WriteReq<struct std::default_delete<char[]> >, struct uv_write_s>::ConstructorAccess, class std::shared_ptr<class Loop>, class std::unique_ptr<char[]>&&, unsigned int);
 
-    template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct WriteEvent&, class details::WriteReq<struct std::default_delete<char[]> >&)> > > > >
+    template Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
+        ::Handler<struct WriteEvent>::Connection
         Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
         ::Handler<struct WriteEvent>
         ::once(class std::function<void(struct WriteEvent&, class details::WriteReq<struct std::default_delete<char[]> >&)>);
 
-    template  class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct WriteEvent&, class details::WriteReq<struct std::default_delete<char[]> >&)> > > > >
+    template          Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
+        ::Handler<struct WriteEvent>::Connection
         Emitter<class details::WriteReq<struct std::default_delete<char[]> >, struct WriteEvent, struct ErrorEvent>
         ::Handler<struct WriteEvent>
         ::once(class std::function<void(struct WriteEvent&, class details::WriteReq<struct std::default_delete<char[]> >&)>);
