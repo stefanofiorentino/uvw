@@ -30,5 +30,10 @@ template uvw::Emitter<uvw::WorkReq, uvw::WorkEvent, uvw::ErrorEvent>::Handler<uv
 template uvw::Emitter<uvw::WorkReq, uvw::WorkEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
     uvw::Emitter<uvw::WorkReq, uvw::WorkEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
     ::on(std::function<void(struct uvw::ErrorEvent&, uvw::WorkReq&)>);
+
+template struct UVW_EXTERN uvw::Emitter<class uvw::WorkReq, struct uvw::WorkEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+template struct UVW_EXTERN uvw::Emitter<class uvw::WorkReq, struct uvw::WorkEvent, struct uvw::ErrorEvent>::Connection<struct uvw::WorkEvent>;
+template bool uvw::Request<class uvw::WorkReq, struct uv_work_s, struct uvw::WorkEvent, struct uvw::ErrorEvent>::cancel();
+template uint64_t uvw::Request<class uvw::WorkReq, struct uv_work_s, struct uvw::WorkEvent, struct uvw::ErrorEvent>::size(void)const noexcept;
 }
 

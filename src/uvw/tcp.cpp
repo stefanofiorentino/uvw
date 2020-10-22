@@ -179,4 +179,5 @@ template int uvw::StreamHandle<uvw::TCPHandle, uv_tcp_s, uvw::ConnectEvent, uvw:
 template bool uvw::StreamHandle<uvw::TCPHandle, uv_tcp_s, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::readable(void)const noexcept;
 
 template void uvw::StreamHandle<uvw::TCPHandle, uv_tcp_s, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::write(char*, unsigned int);
+template struct UVW_EXTERN uvw::Emitter<class uvw::TCPHandle, struct uvw::ConnectEvent, struct uvw::DataEvent, struct uvw::EndEvent, struct uvw::ListenEvent, struct uvw::WriteEvent, struct uvw::ShutdownEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::DataEvent>;
 }

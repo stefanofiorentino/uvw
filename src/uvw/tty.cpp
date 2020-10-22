@@ -90,6 +90,6 @@ Emitter<TTYHandle, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, S
 
 
 template struct UVW_EXTERN Emitter<TTYHandle, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>::Handler<WriteEvent>;
-
+template struct UVW_EXTERN uvw::Emitter<class uvw::TTYHandle, struct uvw::ConnectEvent, struct uvw::DataEvent, struct uvw::EndEvent, struct uvw::ListenEvent, struct uvw::WriteEvent, struct uvw::ShutdownEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::WriteEvent>;
 
 }

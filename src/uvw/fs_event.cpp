@@ -54,4 +54,6 @@ template uvw::Emitter<uvw::FsEventHandle, uvw::FsEventEvent, uvw::CloseEvent, uv
 template uvw::Emitter<uvw::FsEventHandle, uvw::FsEventEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsEventEvent>::Connection uvw::Emitter<uvw::FsEventHandle, uvw::FsEventEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsEventEvent>::on(std::function<void(struct uvw::FsEventEvent&, uvw::FsEventHandle&)>);
 template struct UVW_EXTERN uvw::Emitter<uvw::FsEventHandle, uvw::FsEventEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>;
 template struct UVW_EXTERN uvw::Emitter<uvw::FsEventHandle, uvw::FsEventEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsEventEvent>;
+template struct UVW_EXTERN uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+template struct UVW_EXTERN uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsEventEvent>;
 }

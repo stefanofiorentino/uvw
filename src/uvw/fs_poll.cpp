@@ -46,8 +46,16 @@ UVW_INLINE std::string FsPollHandle::path() noexcept {
 }
 
 
-template uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::on(std::function<void(struct uvw::ErrorEvent&, uvw::FsPollHandle&)>);
-template uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>::Connection uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>::on(std::function<void(struct uvw::FsPollEvent&, uvw::FsPollHandle&)>);
+template uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection 
+uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
+::on(std::function<void(struct uvw::ErrorEvent&, uvw::FsPollHandle&)>);
+
+template uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>::Connection 
+uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>
+::on(std::function<void(struct uvw::FsPollEvent&, uvw::FsPollHandle&)>);
+
 template struct UVW_EXTERN uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>;
 template struct UVW_EXTERN uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>;
+template struct UVW_EXTERN uvw::Emitter<class uvw::FsPollHandle, struct uvw::FsPollEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+template struct UVW_EXTERN uvw::Emitter<class uvw::FsPollHandle, struct uvw::FsPollEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsPollEvent>;
 }
