@@ -308,27 +308,27 @@ private:
         void emit() { publish(FakeEvent{}); }
     };
 
-    template struct UVW_EXTERN uvw::Emitter<struct TestEmitter, struct FakeEvent, struct ErrorEvent>::Connection<struct uvw::FakeEvent>;
-    template void Emitter<struct TestEmitter, struct FakeEvent, struct ErrorEvent>::clear(void)noexcept;
-    template bool uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::empty(void)const noexcept;
+    template struct UVW_EXTERN uvw::Emitter<TestEmitter, FakeEvent, ErrorEvent>::Connection<uvw::FakeEvent>;
+    template void Emitter<TestEmitter, FakeEvent, ErrorEvent>::clear(void)noexcept;
+    template bool uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::empty(void)const noexcept;
     template 
-        uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::Connection
-        uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>
-        ::on(class std::function<void(struct uvw::ErrorEvent&, struct uvw::TestEmitter&)>);
+        uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
+        uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
+        ::on(std::function<void(struct uvw::ErrorEvent&, uvw::TestEmitter&)>);
 
-    template struct UVW_EXTERN uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+    template struct UVW_EXTERN uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
 
     
     template 
-        uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>::Connection
-        uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>
-        ::once(class std::function<void(struct uvw::FakeEvent&, struct uvw::TestEmitter&)>);
+        uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::Connection
+        uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>
+        ::once(std::function<void(struct uvw::FakeEvent&, uvw::TestEmitter&)>);
 
-    template uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>::Connection
-        uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>
-        ::on(class std::function<void(struct uvw::FakeEvent&, struct uvw::TestEmitter&)>);
+    template uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::Connection
+        uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>
+        ::on(std::function<void(struct uvw::FakeEvent&, uvw::TestEmitter&)>);
 
-    template void uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>::erase(uvw::Emitter<struct uvw::TestEmitter, struct uvw::FakeEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FakeEvent>::Connection)noexcept;
+    template void uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::erase(uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::Connection)noexcept;
 
 
 }

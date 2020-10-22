@@ -147,8 +147,8 @@ template bool Loop::run<Loop::Mode::DEFAULT>() noexcept;
 template bool Loop::run<Loop::Mode::ONCE>() noexcept;
 template bool Loop::run<Loop::Mode::NOWAIT>() noexcept;
 template typename 
-uvw::Emitter<class uvw::Loop, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::Connection
-uvw::Emitter<class uvw::Loop, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>
-::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::Loop&)>);
-template struct UVW_EXTERN uvw::Emitter<class uvw::Loop, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
+uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
+::on(std::function<void(struct uvw::ErrorEvent&, uvw::Loop&)>);
+template struct UVW_EXTERN uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
 }

@@ -43,7 +43,10 @@ UVW_INLINE int SignalHandle::signal() const noexcept {
     return get()->signum;
 }
 
-template struct UVW_EXTERN uvw::Emitter<class uvw::SignalHandle, struct uvw::SignalEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
-template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::ErrorEvent&, class uvw::SignalHandle&)> > > > > uvw::Emitter<class uvw::SignalHandle, struct uvw::SignalEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::SignalHandle&)>);
+template struct UVW_EXTERN uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
+template 
+uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
+uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
+::on(std::function<void(struct uvw::ErrorEvent&, uvw::SignalHandle&)>);
 
 }

@@ -314,11 +314,19 @@ template int UDPHandle::trySend<IPv6>(Addr, char *, unsigned int);
 template void UDPHandle::recv<IPv4>();
 template void UDPHandle::recv<IPv6>();
 
-template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::ErrorEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::UDPHandle&)>);
-template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::SendEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::SendEvent>::once(class std::function<void(struct uvw::SendEvent&, class uvw::UDPHandle&)>);
-template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::SendEvent>;
-template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::UDPDataEvent>;
-template class uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
-template class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<struct std::pair<bool, class std::function<void(struct uvw::UDPDataEvent&, class uvw::UDPHandle&)> > > > > uvw::Emitter<class uvw::UDPHandle, struct uvw::UDPDataEvent, struct uvw::SendEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::UDPDataEvent>::once(class std::function<void(struct uvw::UDPDataEvent&, class uvw::UDPHandle&)>);
-template uvw::Flags<enum uvw::details::UVUDPFlags>::Flags<enum uvw::details::UVUDPFlags>(void);
+template uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
+uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
+::on(std::function<void(struct uvw::ErrorEvent&, uvw::UDPHandle&)>);
+template uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::SendEvent>::Connection
+uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::SendEvent>
+::once(std::function<void(struct uvw::SendEvent&, uvw::UDPHandle&)>);
+template class uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Connection<uvw::SendEvent>;
+template class uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Connection<uvw::UDPDataEvent>;
+template class uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
+
+template uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::UDPDataEvent>::Connection
+uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::UDPDataEvent>
+::once(std::function<void(struct uvw::UDPDataEvent&, uvw::UDPHandle&)>);
+
+template uvw::Flags<enum uvw::details::UVUDPFlags>::Flags(void);
 }

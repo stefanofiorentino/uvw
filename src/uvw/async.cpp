@@ -30,11 +30,11 @@ UVW_INLINE void AsyncHandle::send() {
     template struct UVW_EXTERN Emitter<AsyncHandle, AsyncEvent, CloseEvent, ErrorEvent>::Handler<AsyncEvent>;
     template struct UVW_EXTERN Emitter<AsyncHandle, AsyncEvent, CloseEvent, ErrorEvent>::Handler<CloseEvent>;
     template struct UVW_EXTERN Emitter<AsyncHandle, AsyncEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;
-    template uvw::OSFileDescriptor uvw::Handle<class uvw::AsyncHandle, struct uv_async_s, struct uvw::AsyncEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::fd(void)const;
-    template bool uvw::Handle<class uvw::AsyncHandle, struct uv_async_s, struct uvw::AsyncEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::recvBufferSize(int);
-    template uint64_t uvw::Handle<class uvw::AsyncHandle, struct uv_async_s, struct uvw::AsyncEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::size(void)const noexcept;
-    template int uvw::Handle<class uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::sendBufferSize(void);
-    template bool uvw::Handle<class uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::sendBufferSize(int);
-    template int uvw::Handle<class uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::recvBufferSize(void);
-    template uv_async_t* uvw::UnderlyingType<class uvw::AsyncHandle, struct uv_async_s>::raw(void) noexcept;
+    template uvw::OSFileDescriptor uvw::Handle<uvw::AsyncHandle, uv_async_s, uvw::AsyncEvent, uvw::CloseEvent, uvw::ErrorEvent>::fd(void)const;
+    template bool uvw::Handle<uvw::AsyncHandle, uv_async_s, uvw::AsyncEvent, uvw::CloseEvent, uvw::ErrorEvent>::recvBufferSize(int);
+    template uint64_t uvw::Handle<uvw::AsyncHandle, uv_async_s, uvw::AsyncEvent, uvw::CloseEvent, uvw::ErrorEvent>::size(void)const noexcept;
+    template int uvw::Handle<uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::sendBufferSize(void);
+    template bool uvw::Handle<uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::sendBufferSize(int);
+    template int uvw::Handle<uvw::AsyncHandle,struct uv_async_s,struct uvw::AsyncEvent,struct uvw::CloseEvent,struct uvw::ErrorEvent>::recvBufferSize(void);
+    template uv_async_t* uvw::UnderlyingType<uvw::AsyncHandle, uv_async_s>::raw(void) noexcept;
 }

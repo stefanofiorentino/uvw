@@ -98,9 +98,9 @@ UVW_INLINE bool PipeHandle::chmod(Flags<Chmod> flags) noexcept {
     template bool StreamHandle<PipeHandle, uv_pipe_s, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>::readable() const noexcept;
     template void StreamHandle<PipeHandle, uv_pipe_s, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>::listen(int);
     template void StreamHandle<PipeHandle, uv_pipe_s, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>::read();
-    template int uvw::StreamHandle<class uvw::PipeHandle, struct uv_pipe_s, struct uvw::ConnectEvent, struct uvw::DataEvent, struct uvw::EndEvent, struct uvw::ListenEvent, struct uvw::WriteEvent, struct uvw::ShutdownEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::tryWrite(class std::unique_ptr<char[]>, unsigned int);
+    template int uvw::StreamHandle<uvw::PipeHandle, uv_pipe_s, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::tryWrite(std::unique_ptr<char[]>, unsigned int);
     
     template void 
-    uvw::StreamHandle<class uvw::PipeHandle, struct uv_pipe_s, struct uvw::ConnectEvent, struct uvw::DataEvent, struct uvw::EndEvent, struct uvw::ListenEvent, struct uvw::WriteEvent, struct uvw::ShutdownEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>
+    uvw::StreamHandle<uvw::PipeHandle, uv_pipe_s, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>
     ::write(char*, unsigned int);
 }
