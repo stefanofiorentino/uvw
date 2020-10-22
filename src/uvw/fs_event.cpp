@@ -52,6 +52,6 @@ UVW_INLINE std::string FsEventHandle::path() noexcept {
 
 template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::Connection uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::ErrorEvent>::on(class std::function<void(struct uvw::ErrorEvent&, class uvw::FsEventHandle&)>);
 template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FsEventEvent>::Connection uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Handler<struct uvw::FsEventEvent>::on(class std::function<void(struct uvw::FsEventEvent&, class uvw::FsEventHandle&)>);
-// template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
-// template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsEventEvent>;
+ template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
+ template uvw::Emitter<class uvw::FsEventHandle, struct uvw::FsEventEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsEventEvent>;
 }
