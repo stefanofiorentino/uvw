@@ -32,7 +32,7 @@ class UVW_EXTERN AsyncHandle final: public Handle<AsyncHandle, uv_async_t, Async
     static void sendCallback(uv_async_t *handle);
 
 public:
-    using Handle<AsyncHandle, uv_async_t, AsyncEvent, CloseEvent, ErrorEvent>::Handle;
+    using Handle::Handle;
 
     /**
      * @brief Initializes the handle.
