@@ -55,4 +55,5 @@ UVW_INLINE void PollHandle::stop() {
     invoke(&uv_poll_stop, get());
 }
 
+    template<> uvw::Emitter<uvw::PollHandle, uvw::PollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 }

@@ -13,6 +13,7 @@ UVW_MSVC_WARNING_PUSH_DISABLE_DLLINTERFACE();
 
 namespace uvw {
 
+class AsyncHandle;
 
 /**
  * @brief Common class for almost all the resources available in `uvw`.
@@ -46,6 +47,8 @@ public:
         : UnderlyingType<T, U>{ca, std::move(ref)}
     {
         this->get()->data = this;
+        auto &handle = *static_cast<AsyncHandle*>(this->get()->data);
+        return;
     }
 
     /**

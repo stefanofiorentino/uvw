@@ -102,7 +102,7 @@ UVW_INLINE void TCPHandle::closeReset() {
 
 
 // explicit instantiations
-
+template<> uvw::Emitter<uvw::TCPHandle, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 template void TCPHandle::bind<IPv4>(std::string, unsigned int, Flags<Bind>);
 template void TCPHandle::bind<IPv6>(std::string, unsigned int, Flags<Bind>);
 

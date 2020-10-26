@@ -35,5 +35,6 @@ template struct UVW_EXTERN uvw::Emitter<class uvw::WorkReq, struct uvw::WorkEven
 template struct UVW_EXTERN uvw::Emitter<class uvw::WorkReq, struct uvw::WorkEvent, struct uvw::ErrorEvent>::Connection<struct uvw::WorkEvent>;
 template bool uvw::Request<class uvw::WorkReq, struct uv_work_s, struct uvw::WorkEvent, struct uvw::ErrorEvent>::cancel();
 template uint64_t uvw::Request<class uvw::WorkReq, struct uv_work_s, struct uvw::WorkEvent, struct uvw::ErrorEvent>::size(void)const noexcept;
+template<> uvw::Emitter<uvw::WorkReq, uvw::WorkEvent, uvw::ErrorEvent>::Emitter() = default;
 }
 

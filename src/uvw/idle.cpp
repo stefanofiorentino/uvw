@@ -36,6 +36,6 @@ UVW_INLINE void IdleHandle::stop() {
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<IdleEvent>;
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<CloseEvent>;
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;
-
+    template<> uvw::Emitter<uvw::IdleHandle, uvw::IdleEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 
 }

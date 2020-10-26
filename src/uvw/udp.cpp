@@ -256,7 +256,8 @@ UVW_INLINE size_t UDPHandle::sendQueueCount() const noexcept {
 
 
 // explicit instantiations
-
+template <> uvw::Emitter<uvw::UDPHandle, uvw::UDPDataEvent, uvw::SendEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+template<> uvw::Emitter<uvw::details::SendReq, uvw::SendEvent, uvw::ErrorEvent>::Emitter() = default;
 template void UDPHandle::connect<IPv4>(std::string, unsigned int);
 template void UDPHandle::connect<IPv6>(std::string, unsigned int);
 

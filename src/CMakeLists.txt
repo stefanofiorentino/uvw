@@ -21,6 +21,7 @@ function(add_uvw_library LIB_NAME)
             uvw/poll.cpp
             uvw/prepare.cpp
             uvw/process.cpp
+            uvw/resource.cpp
             uvw/signal.cpp
             uvw/stream.cpp
             uvw/tcp.cpp

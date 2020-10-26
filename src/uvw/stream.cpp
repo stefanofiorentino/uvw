@@ -28,4 +28,9 @@ namespace uvw {
         Emitter<details::WriteReq<std::default_delete<char[]> >, WriteEvent, ErrorEvent>::Handler<ErrorEvent>
         ::once(std::function<void(struct ErrorEvent&, details::WriteReq<std::default_delete<char[]> >&)>);
 
+    
+    template<> uvw::Emitter<uvw::details::WriteReq<void (*)(char*)>, uvw::WriteEvent, uvw::ErrorEvent>::Emitter() = default;
+    template<> uvw::Emitter<uvw::details::WriteReq<std::default_delete<char []> >, uvw::WriteEvent, uvw::ErrorEvent>::Emitter() = default;
+    template<> uvw::Emitter<uvw::details::ShutdownReq, uvw::ShutdownEvent, uvw::ErrorEvent>::Emitter() = default;
+    template<> uvw::Emitter<uvw::details::ConnectReq, uvw::ConnectEvent, uvw::ErrorEvent>::Emitter() = default;
 }

@@ -151,4 +151,5 @@ uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
 uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
 ::on(std::function<void(struct uvw::ErrorEvent&, uvw::Loop&)>);
 template struct UVW_EXTERN uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
+
 }

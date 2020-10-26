@@ -119,64 +119,65 @@ namespace uvw {
                     std::for_each(onceL.begin(), onceL.end(), func);
                     std::for_each(onL.begin(), onL.end(), func);
                 }
-     else {
-      onceL.clear();
-      onL.clear();
-  }
-}
+                else {
+                    onceL.clear();
+                    onL.clear();
+                }
+            }
 
-Connection once(Listener f) {
-    return onceL.emplace(onceL.cend(), false, std::move(f));
-}
+            Connection once(Listener f) {
+                return onceL.emplace(onceL.cend(), false, std::move(f));
+            }
 
-Connection on(Listener f) {
-    return onL.emplace(onL.cend(), false, std::move(f));
-}
+            Connection on(Listener f) {
+                return onL.emplace(onL.cend(), false, std::move(f));
+            }
 
-void erase(Connection conn) noexcept {
-    conn->first = true;
+            void erase(Connection conn) noexcept {
+                conn->first = true;
 
-    if (!publishing) {
-        auto pred = [](auto&& element) { return element.first; };
-        onceL.remove_if(pred);
-        onL.remove_if(pred);
-    }
-}
+                if (!publishing) {
+                    auto pred = [](auto&& element) { return element.first; };
+                    onceL.remove_if(pred);
+                    onL.remove_if(pred);
+                }
+            }
 
-void publish(E event, T& ref) {
-    ListenerList currentL;
-    onceL.swap(currentL);
+            void publish(E event, T& ref) {
+                ListenerList currentL;
+                std::swap(onceL, currentL);
+                
+                auto func = [&event, &ref](auto&& element) {
+                    return element.first ? void() : element.second(event, ref);
+                };
 
-    auto func = [&event, &ref](auto&& element) {
-        return element.first ? void() : element.second(event, ref);
-    };
+                publishing = true;
 
-    publishing = true;
+                std::for_each(onL.rbegin(), onL.rend(), func);
+                std::for_each(currentL.rbegin(), currentL.rend(), func);
 
-    std::for_each(onL.rbegin(), onL.rend(), func);
-    std::for_each(currentL.rbegin(), currentL.rend(), func);
+                publishing = false;
 
-    publishing = false;
+                onL.remove_if([](auto&& element) { return element.first; });
+            }
 
-    onL.remove_if([](auto&& element) { return element.first; });
-}
-
-private:
-    bool publishing{false};
-    ListenerList onceL{};
-    ListenerList onL{};
+            private:
+                bool publishing{false};
+                ListenerList onceL{};
+                ListenerList onL{};
         };
 
     protected:
         template<typename E>
         void publish(E event) {
-            std::get<Handler<E>>(pools).publish(std::move(event), *static_cast<T*>(this));
+            auto &handler = std::get<Handler<E>>(pools);
+            handler.publish(std::move(event), *static_cast<T*>(this));
         }
 
     public:
-        Emitter() = default;
-        Emitter(Emitter&&) = default;
-        Emitter& operator=(Emitter&&) = default;
+        Emitter();
+        Emitter(Emitter&&);
+        Emitter& operator=(Emitter&&);
 
         // These must be deleted because MSVC try to export them with UVW_EXPORT
         Emitter(const Emitter&) = delete;
@@ -230,7 +231,8 @@ private:
          */
         template<typename E>
         Connection<E> on(Listener<E> f) {
-            return std::get<Handler<E>>(pools).on(std::move(f));
+            auto &handler = std::get<Handler<E>>(pools);
+            return handler.on(std::move(f));
         }
 
         /**
@@ -299,7 +301,7 @@ private:
         }
 
     private:
-        std::tuple<Handler<Events>...> pools;
+        std::tuple<Handler<Events>...> pools{};
     };
 
     struct UVW_EXTERN FakeEvent { };

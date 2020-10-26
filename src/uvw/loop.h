@@ -429,6 +429,7 @@ private:
 
 // (extern) explicit instantiations
 
+template<> inline uvw::Emitter<uvw::Loop, uvw::ErrorEvent>::Emitter() = default;
 extern template UVW_EXTERN bool Loop::run<Loop::Mode::DEFAULT>() noexcept;
 extern template UVW_EXTERN bool Loop::run<Loop::Mode::ONCE>() noexcept;
 extern template UVW_EXTERN bool Loop::run<Loop::Mode::NOWAIT>() noexcept;
