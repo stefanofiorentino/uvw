@@ -9,7 +9,9 @@ namespace uvw {
 
 
 UVW_INLINE void AsyncHandle::sendCallback(uv_async_t *handle) {
-    AsyncHandle &async = *(static_cast<AsyncHandle *>(handle->data));
+    // AsyncHandle &async = *(static_cast<AsyncHandle*>(handle->data));
+    auto &resource = *(static_cast<Resource<AsyncHandle, uv_async_t, AsyncEvent, CloseEvent, ErrorEvent> *>(handle->data));
+    AsyncHandle &async = static_cast<AsyncHandle&>(resource);
     async.publish(AsyncEvent{});
 }
 

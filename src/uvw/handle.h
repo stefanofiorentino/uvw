@@ -32,7 +32,9 @@ template<typename T, typename U, typename ...Events>
 class UVW_EXTERN Handle: public BaseHandle, public Resource<T, U, Events...> {
 protected:
     static void closeCallback(uv_handle_t *handle) {
-        Handle<T, U, Events...> &ref = *(static_cast<T*>(handle->data));
+        // Handle<T, U, Events...> &ref = *(static_cast<T*>(handle->data));
+        auto &resource_ref = *(static_cast<Resource<T, U, Events...>*>(handle->data));
+        auto &ref = static_cast<Handle<T, U, Events...>&>(resource_ref);
         auto ptr = ref.shared_from_this();
         (void)ptr;
         ref.reset();
