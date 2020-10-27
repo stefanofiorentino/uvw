@@ -15,7 +15,9 @@ UVW_INLINE ExitEvent::ExitEvent(int64_t code, int sig) noexcept
 
 
 UVW_INLINE void ProcessHandle::exitCallback(uv_process_t *handle, int64_t exitStatus, int termSignal) {
-    ProcessHandle &process = *(static_cast<ProcessHandle *>(handle->data));
+    // ProcessHandle &process = *(static_cast<ProcessHandle *>(handle->data));
+    auto &resource = *(static_cast<Resource<ProcessHandle, uv_process_t, ExitEvent, CloseEvent, ErrorEvent>*>(handle->data));
+    ProcessHandle &process = static_cast<ProcessHandle &>(resource);
     process.publish(ExitEvent{exitStatus, termSignal});
 }
 

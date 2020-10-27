@@ -171,7 +171,8 @@ namespace uvw {
         template<typename E>
         void publish(E event) {
             auto &handler = std::get<Handler<E>>(pools);
-            handler.publish(std::move(event), *static_cast<T*>(this));
+            auto &emitter = *static_cast<T*>(this);
+            handler.publish(std::move(event), emitter);
         }
 
     public:

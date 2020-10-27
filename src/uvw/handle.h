@@ -63,7 +63,7 @@ protected:
     template<typename F, typename... Args>
     void invoke(F &&f, Args&&... args) {
         auto err = std::forward<F>(f)(std::forward<Args>(args)...);
-        if(err) { Emitter<T, Events...>::publish(ErrorEvent{err}); }
+        if(err) { Resource<T, U, Events...>::publish(ErrorEvent{err}); }
     }
 
 public:

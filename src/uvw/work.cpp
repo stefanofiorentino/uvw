@@ -16,7 +16,9 @@ UVW_INLINE WorkReq::WorkReq(ConstructorAccess ca, std::shared_ptr<Loop> ref, Int
 
 
 UVW_INLINE void WorkReq::workCallback(uv_work_t *req) {
-    static_cast<WorkReq*>(req->data)->task();
+    auto &resource = *(static_cast<Resource<WorkReq, uv_work_t, WorkEvent, ErrorEvent>*>(req->data));
+    WorkReq &work = static_cast<WorkReq &>(resource);
+    work.task();
 }
 
 

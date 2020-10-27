@@ -24,7 +24,8 @@ template<typename T, typename U, typename ...Events>
 class UVW_EXTERN Request: public Resource<T, U, Events...> {
 protected:
     static auto reserve(U *req) {
-        auto ptr = static_cast<T*>(req->data)->shared_from_this();
+        auto ptr = static_cast<Resource<T, U, Events...> *>(req->data)->shared_from_this();
+
         ptr->reset();
         return ptr;
     }

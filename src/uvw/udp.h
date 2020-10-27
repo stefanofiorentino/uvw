@@ -103,7 +103,7 @@ class UVW_EXTERN UDPHandle final: public Handle<UDPHandle, uv_udp_t, UDPDataEven
 
         // UDPHandle &udp = *(static_cast<UDPHandle*>(handle->data));
         auto &resource = *(static_cast<Resource<UDPHandle, uv_udp_t, UDPDataEvent, SendEvent, CloseEvent, ErrorEvent>*>(handle->data));
-    UDPHandle &udp = static_cast<UDPHandle &>(resource);
+        UDPHandle &udp = static_cast<UDPHandle &>(resource);
         // data will be destroyed no matter of what the value of nread is
         std::unique_ptr<char[]> data{buf->base};
 
