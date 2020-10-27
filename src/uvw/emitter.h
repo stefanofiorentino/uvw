@@ -175,9 +175,9 @@ namespace uvw {
         }
 
     public:
-        Emitter();
-        Emitter(Emitter&&);
-        Emitter& operator=(Emitter&&);
+        Emitter() = default;
+        Emitter(Emitter&&) = default;
+        Emitter& operator=(Emitter&&) = default;
 
         // These must be deleted because MSVC try to export them with UVW_EXPORT
         Emitter(const Emitter&) = delete;
@@ -331,8 +331,7 @@ namespace uvw {
         ::on(std::function<void(struct uvw::FakeEvent&, uvw::TestEmitter&)>);
 
     template void uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::erase(uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Handler<uvw::FakeEvent>::Connection)noexcept;
-
-
+    // template<> inline uvw::Emitter<uvw::TestEmitter, uvw::FakeEvent, uvw::ErrorEvent>::Emitter() = default;
 }
 #ifndef UVW_AS_LIB
 #include "emitter.cpp"

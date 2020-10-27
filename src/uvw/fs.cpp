@@ -970,5 +970,48 @@ template struct UVW_EXTERN uvw::Emitter<uvw::FsReq, uvw::FsEvent<details::UVFsTy
 template struct UVW_EXTERN uvw::Emitter<uvw::FsReq, uvw::FsEvent<details::UVFsType::UNKNOWN>, uvw::FsEvent<details::UVFsType::CUSTOM>, uvw::FsEvent<details::UVFsType::OPEN>, uvw::FsEvent<details::UVFsType::CLOSE>, uvw::FsEvent<details::UVFsType::READ>, uvw::FsEvent<details::UVFsType::WRITE>, uvw::FsEvent<details::UVFsType::SENDFILE>, uvw::FsEvent<details::UVFsType::STAT>, uvw::FsEvent<details::UVFsType::LSTAT>, uvw::FsEvent<details::UVFsType::FSTAT>, uvw::FsEvent<details::UVFsType::FTRUNCATE>, uvw::FsEvent<details::UVFsType::UTIME>, uvw::FsEvent<details::UVFsType::FUTIME>, uvw::FsEvent<details::UVFsType::ACCESS>, uvw::FsEvent<details::UVFsType::CHMOD>, uvw::FsEvent<details::UVFsType::FCHMOD>, uvw::FsEvent<details::UVFsType::FSYNC>, uvw::FsEvent<details::UVFsType::FDATASYNC>, uvw::FsEvent<details::UVFsType::UNLINK>, uvw::FsEvent<details::UVFsType::RMDIR>, uvw::FsEvent<details::UVFsType::MKDIR>, uvw::FsEvent<details::UVFsType::MKDTEMP>, uvw::FsEvent<details::UVFsType::RENAME>, uvw::FsEvent<details::UVFsType::SCANDIR>, uvw::FsEvent<details::UVFsType::LINK>, uvw::FsEvent<details::UVFsType::SYMLINK>, uvw::FsEvent<details::UVFsType::READLINK>, uvw::FsEvent<details::UVFsType::CHOWN>, uvw::FsEvent<details::UVFsType::FCHOWN>, uvw::FsEvent<details::UVFsType::REALPATH>, uvw::FsEvent<details::UVFsType::COPYFILE>, uvw::FsEvent<details::UVFsType::LCHOWN>, uvw::FsEvent<details::UVFsType::OPENDIR>, uvw::FsEvent<details::UVFsType::READDIR>, uvw::FsEvent<details::UVFsType::CLOSEDIR>, uvw::FsEvent<details::UVFsType::STATFS>, uvw::FsEvent<details::UVFsType::MKSTEMP>, uvw::FsEvent<details::UVFsType::LUTIME>, uvw::ErrorEvent>::Connection<uvw::FsEvent<details::UVFsType::LUTIME>>;
 template struct UVW_EXTERN uvw::Emitter<uvw::FsReq, uvw::FsEvent<details::UVFsType::UNKNOWN>, uvw::FsEvent<details::UVFsType::CUSTOM>, uvw::FsEvent<details::UVFsType::OPEN>, uvw::FsEvent<details::UVFsType::CLOSE>, uvw::FsEvent<details::UVFsType::READ>, uvw::FsEvent<details::UVFsType::WRITE>, uvw::FsEvent<details::UVFsType::SENDFILE>, uvw::FsEvent<details::UVFsType::STAT>, uvw::FsEvent<details::UVFsType::LSTAT>, uvw::FsEvent<details::UVFsType::FSTAT>, uvw::FsEvent<details::UVFsType::FTRUNCATE>, uvw::FsEvent<details::UVFsType::UTIME>, uvw::FsEvent<details::UVFsType::FUTIME>, uvw::FsEvent<details::UVFsType::ACCESS>, uvw::FsEvent<details::UVFsType::CHMOD>, uvw::FsEvent<details::UVFsType::FCHMOD>, uvw::FsEvent<details::UVFsType::FSYNC>, uvw::FsEvent<details::UVFsType::FDATASYNC>, uvw::FsEvent<details::UVFsType::UNLINK>, uvw::FsEvent<details::UVFsType::RMDIR>, uvw::FsEvent<details::UVFsType::MKDIR>, uvw::FsEvent<details::UVFsType::MKDTEMP>, uvw::FsEvent<details::UVFsType::RENAME>, uvw::FsEvent<details::UVFsType::SCANDIR>, uvw::FsEvent<details::UVFsType::LINK>, uvw::FsEvent<details::UVFsType::SYMLINK>, uvw::FsEvent<details::UVFsType::READLINK>, uvw::FsEvent<details::UVFsType::CHOWN>, uvw::FsEvent<details::UVFsType::FCHOWN>, uvw::FsEvent<details::UVFsType::REALPATH>, uvw::FsEvent<details::UVFsType::COPYFILE>, uvw::FsEvent<details::UVFsType::LCHOWN>, uvw::FsEvent<details::UVFsType::OPENDIR>, uvw::FsEvent<details::UVFsType::READDIR>, uvw::FsEvent<details::UVFsType::CLOSEDIR>, uvw::FsEvent<details::UVFsType::STATFS>, uvw::FsEvent<details::UVFsType::MKSTEMP>, uvw::FsEvent<details::UVFsType::LUTIME>, uvw::ErrorEvent>::Connection<uvw::ErrorEvent>;
 
+// template<> uvw::Emitter<uvw::FileReq, 
+//     struct uvw::FsEvent<uvw::details::UVFsType::UNKNOWN>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::CUSTOM>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::OPEN>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::CLOSE>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::READ>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::WRITE>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::SENDFILE>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::STAT>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::LSTAT>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FSTAT>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FTRUNCATE>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::UTIME>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FUTIME>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::ACCESS>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::CHMOD>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FCHMOD>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FSYNC>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FDATASYNC>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::UNLINK>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::RMDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::MKDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::MKDTEMP>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::RENAME>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::SCANDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::LINK>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::SYMLINK>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::READLINK>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::CHOWN>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::FCHOWN>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::REALPATH>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::COPYFILE>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::LCHOWN>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::OPENDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::READDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::CLOSEDIR>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::STATFS>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::MKSTEMP>, \
+//     struct uvw::FsEvent<uvw::details::UVFsType::LUTIME>, \
+// uvw::ErrorEvent>::Emitter() = default;
 
+    // template<> uvw::Emitter<uvw::FsReq, 
+    // uvw::FsEvent<details::UVFsType::UNKNOWN>, uvw::FsEvent<details::UVFsType::CUSTOM>, uvw::FsEvent<details::UVFsType::OPEN>, uvw::FsEvent<details::UVFsType::CLOSE>, uvw::FsEvent<details::UVFsType::READ>, uvw::FsEvent<details::UVFsType::WRITE>, uvw::FsEvent<details::UVFsType::SENDFILE>, uvw::FsEvent<details::UVFsType::STAT>, uvw::FsEvent<details::UVFsType::LSTAT>, uvw::FsEvent<details::UVFsType::FSTAT>, uvw::FsEvent<details::UVFsType::FTRUNCATE>, uvw::FsEvent<details::UVFsType::UTIME>, uvw::FsEvent<details::UVFsType::FUTIME>, uvw::FsEvent<details::UVFsType::ACCESS>, uvw::FsEvent<details::UVFsType::CHMOD>, uvw::FsEvent<details::UVFsType::FCHMOD>, uvw::FsEvent<details::UVFsType::FSYNC>, uvw::FsEvent<details::UVFsType::FDATASYNC>, uvw::FsEvent<details::UVFsType::UNLINK>, uvw::FsEvent<details::UVFsType::RMDIR>, uvw::FsEvent<details::UVFsType::MKDIR>, uvw::FsEvent<details::UVFsType::MKDTEMP>, uvw::FsEvent<details::UVFsType::RENAME>, uvw::FsEvent<details::UVFsType::SCANDIR>, uvw::FsEvent<details::UVFsType::LINK>, uvw::FsEvent<details::UVFsType::SYMLINK>, uvw::FsEvent<details::UVFsType::READLINK>, uvw::FsEvent<details::UVFsType::CHOWN>, uvw::FsEvent<details::UVFsType::FCHOWN>, uvw::FsEvent<details::UVFsType::REALPATH>, uvw::FsEvent<details::UVFsType::COPYFILE>, uvw::FsEvent<details::UVFsType::LCHOWN>, uvw::FsEvent<details::UVFsType::OPENDIR>, uvw::FsEvent<details::UVFsType::READDIR>, uvw::FsEvent<details::UVFsType::CLOSEDIR>, uvw::FsEvent<details::UVFsType::STATFS>, uvw::FsEvent<details::UVFsType::MKSTEMP>, uvw::FsEvent<details::UVFsType::LUTIME>, 
+    // uvw::ErrorEvent>::Emitter() = default;
 }

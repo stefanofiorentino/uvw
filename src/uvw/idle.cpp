@@ -9,7 +9,9 @@ namespace uvw {
 
 
 UVW_INLINE void IdleHandle::startCallback(uv_idle_t *handle) {
-    IdleHandle &idle = *(static_cast<IdleHandle *>(handle->data));
+    // IdleHandle &idle = *(static_cast<IdleHandle *>(handle->data));
+    auto &resource = *(static_cast<Resource<IdleHandle, uv_idle_t, IdleEvent, CloseEvent, ErrorEvent>*>(handle->data));
+    IdleHandle &idle = static_cast<IdleHandle &>(resource);
     idle.publish(IdleEvent{});
 }
 
@@ -36,6 +38,6 @@ UVW_INLINE void IdleHandle::stop() {
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<IdleEvent>;
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<CloseEvent>;
     template struct UVW_EXTERN Emitter<IdleHandle, IdleEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;
-    template<> uvw::Emitter<uvw::IdleHandle, uvw::IdleEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+    // template<> uvw::Emitter<uvw::IdleHandle, uvw::IdleEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 
 }

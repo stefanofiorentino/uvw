@@ -32,9 +32,7 @@ UVW_INLINE ErrorEvent::operator bool() const noexcept {
     return ec < 0;
 }
 
-template<typename T, typename ...Events> Emitter<T, Events...>::Emitter() = default;
-template<typename T, typename ...Events> Emitter<T, Events...>::Emitter(Emitter&&) = default;
-template<typename T, typename ...Events> Emitter<T, Events...>&  Emitter<T, Events...>::operator=(Emitter&&) = default;
+
 
 
 

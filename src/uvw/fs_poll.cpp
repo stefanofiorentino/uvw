@@ -58,4 +58,5 @@ template struct UVW_EXTERN uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw
 template struct UVW_EXTERN uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::FsPollEvent>;
 template struct UVW_EXTERN uvw::Emitter<class uvw::FsPollHandle, struct uvw::FsPollEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::ErrorEvent>;
 template struct UVW_EXTERN uvw::Emitter<class uvw::FsPollHandle, struct uvw::FsPollEvent, struct uvw::CloseEvent, struct uvw::ErrorEvent>::Connection<struct uvw::FsPollEvent>;
+// template<> uvw::Emitter<uvw::FsPollHandle, uvw::FsPollEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 }

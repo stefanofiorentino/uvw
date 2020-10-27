@@ -76,7 +76,7 @@ UVW_INLINE TTYHandle::VTermState TTYHandle::vtermState() const noexcept {
     return VTermState{state};
 }
 
-template<> uvw::Emitter<uvw::TTYHandle, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+// template<> uvw::Emitter<uvw::TTYHandle, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 template struct UVW_EXTERN Emitter<details::WriteReq<std::default_delete<char[]> >, WriteEvent, ErrorEvent>
 ::Connection<WriteEvent>;
 template struct UVW_EXTERN Emitter<details::WriteReq<std::default_delete<char[]> >, WriteEvent, ErrorEvent>

@@ -72,7 +72,7 @@ UVW_INLINE bool PipeHandle::chmod(Flags<Chmod> flags) noexcept {
     return (0 == uv_pipe_chmod(get(), flags));
 }
 
-    template<> uvw::Emitter<uvw::PipeHandle, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+    // template<> uvw::Emitter<uvw::PipeHandle, uvw::ConnectEvent, uvw::DataEvent, uvw::EndEvent, uvw::ListenEvent, uvw::WriteEvent, uvw::ShutdownEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
     template class UVW_EXTERN Resource<PipeHandle, uv_pipe_t, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>;
 
     template struct UVW_EXTERN Emitter<PipeHandle, ConnectEvent, DataEvent, EndEvent, ListenEvent, WriteEvent, ShutdownEvent, CloseEvent, ErrorEvent>::Connection<ConnectEvent>;

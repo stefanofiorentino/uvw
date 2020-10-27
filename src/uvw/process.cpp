@@ -128,6 +128,6 @@ UVW_INLINE ProcessHandle &ProcessHandle::gid(Gid id) {
     return *this;
 }
 
-template<> uvw::Emitter<uvw::ProcessHandle, uvw::ExitEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+// template<> uvw::Emitter<uvw::ProcessHandle, uvw::ExitEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 
 }

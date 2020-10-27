@@ -9,7 +9,9 @@ namespace uvw {
 
 
 UVW_INLINE void TimerHandle::startCallback(uv_timer_t *handle) {
-    TimerHandle &timer = *(static_cast<TimerHandle *>(handle->data));
+    // TimerHandle &timer = *(static_cast<TimerHandle *>(handle->data));
+    auto &resource = *(static_cast<Resource<TimerHandle, uv_timer_t, TimerEvent, CloseEvent, ErrorEvent>*>(handle->data));
+    TimerHandle &timer = static_cast<TimerHandle &>(resource);
     timer.publish(TimerEvent{});
 }
 
@@ -43,6 +45,7 @@ UVW_INLINE TimerHandle::Time TimerHandle::repeat() {
     return Time{uv_timer_get_repeat(get())};
 }
 
+// template<> Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Emitter() = default;
 template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Connection<ErrorEvent>;
 template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Connection<TimerEvent>;
 template struct UVW_EXTERN Emitter<TimerHandle, TimerEvent, CloseEvent, ErrorEvent>::Handler<ErrorEvent>;

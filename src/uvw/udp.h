@@ -101,7 +101,9 @@ class UVW_EXTERN UDPHandle final: public Handle<UDPHandle, uv_udp_t, UDPDataEven
     static void recvCallback(uv_udp_t *handle, ssize_t nread, const uv_buf_t *buf, const sockaddr *addr, unsigned flags) {
         const typename details::IpTraits<I>::Type *aptr = reinterpret_cast<const typename details::IpTraits<I>::Type *>(addr);
 
-        UDPHandle &udp = *(static_cast<UDPHandle*>(handle->data));
+        // UDPHandle &udp = *(static_cast<UDPHandle*>(handle->data));
+        auto &resource = *(static_cast<Resource<UDPHandle, uv_udp_t, UDPDataEvent, SendEvent, CloseEvent, ErrorEvent>*>(handle->data));
+    UDPHandle &udp = static_cast<UDPHandle &>(resource);
         // data will be destroyed no matter of what the value of nread is
         std::unique_ptr<char[]> data{buf->base};
 

@@ -48,5 +48,5 @@ template
 uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
 uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
 ::on(std::function<void(struct uvw::ErrorEvent&, uvw::SignalHandle&)>);
-
+// template<> uvw::Emitter<uvw::SignalHandle, uvw::SignalEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 }

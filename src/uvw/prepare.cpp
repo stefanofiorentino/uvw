@@ -9,7 +9,9 @@ namespace uvw {
 
 
 UVW_INLINE void PrepareHandle::startCallback(uv_prepare_t *handle) {
-    PrepareHandle &prepare = *(static_cast<PrepareHandle *>(handle->data));
+    // PrepareHandle &prepare = *(static_cast<PrepareHandle *>(handle->data));
+    auto &resource = *(static_cast<Resource<PrepareHandle, uv_prepare_t, PrepareEvent, CloseEvent, ErrorEvent>*>(handle->data));
+    PrepareHandle &prepare = static_cast<PrepareHandle &>(resource);
     prepare.publish(PrepareEvent{});
 }
 
@@ -36,4 +38,5 @@ template struct UVW_EXTERN uvw::Emitter<uvw::PrepareHandle, uvw::PrepareEvent, u
 template uvw::Emitter<uvw::PrepareHandle, uvw::PrepareEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>::Connection
 uvw::Emitter<uvw::PrepareHandle, uvw::PrepareEvent, uvw::CloseEvent, uvw::ErrorEvent>::Handler<uvw::ErrorEvent>
 ::on(std::function<void(struct uvw::ErrorEvent&, uvw::PrepareHandle&)>);
+// template<> uvw::Emitter<uvw::PrepareHandle, uvw::PrepareEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
 }

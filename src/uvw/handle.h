@@ -14,7 +14,6 @@ UVW_MSVC_WARNING_PUSH_DISABLE_DLLINTERFACE();
 
 namespace uvw {
 
-
 /**
  * @brief CloseEvent event.
  *

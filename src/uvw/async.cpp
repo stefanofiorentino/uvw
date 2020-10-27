@@ -25,7 +25,7 @@ UVW_INLINE void AsyncHandle::send() {
     invoke(&uv_async_send, get());
 }
 
-    template<> uvw::Emitter<uvw::AsyncHandle, uvw::AsyncEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
+    // template<> uvw::Emitter<uvw::AsyncHandle, uvw::AsyncEvent, uvw::CloseEvent, uvw::ErrorEvent>::Emitter() = default;
     template class UVW_EXTERN Resource<AsyncHandle, uv_async_t, AsyncEvent, CloseEvent, ErrorEvent>;
     template struct UVW_EXTERN Emitter<AsyncHandle, AsyncEvent, CloseEvent, ErrorEvent>::Connection<AsyncEvent>;
     template struct UVW_EXTERN Emitter<AsyncHandle, AsyncEvent, CloseEvent, ErrorEvent>::Connection<CloseEvent>;
