@@ -136,7 +136,8 @@ class UVW_EXTERN StreamHandle: public Handle<T, U, Events...> {
     static constexpr unsigned int DEFAULT_BACKLOG = 128;
 
     static void readCallback(uv_stream_t *handle, ssize_t nread, const uv_buf_t *buf) {
-        T &ref = *(static_cast<T*>(handle->data));
+        auto &resource = *(static_cast<Resource<T, U, Events...>*>(handle->data));
+        T &ref = static_cast<T &>(resource);
         // data will be destroyed no matter of what the value of nread is
         std::unique_ptr<char[]> data{buf->base};
 
@@ -157,7 +158,8 @@ class UVW_EXTERN StreamHandle: public Handle<T, U, Events...> {
     }
 
     static void listenCallback(uv_stream_t *handle, int status) {
-        T &ref = *(static_cast<T*>(handle->data));
+        auto &resource = *(static_cast<Resource<T, U, Events...>*>(handle->data));
+        T &ref = static_cast<T &>(resource);
         if(status) { ref.publish(ErrorEvent{status}); }
         else { ref.publish(ListenEvent{}); }
     }
