@@ -348,14 +348,14 @@ public:
      */
     template<typename S>
     void write(S &send, char *data, unsigned int len) {
-        /*auto req = this->loop().template resource<details::WriteReq<void(*)(char *)>>(std::unique_ptr<char[], void(*)(char *)>{data, [](char *) {}}, len);
+        auto req = this->loop().template resource<details::WriteReq<void(*)(char *)>>(std::unique_ptr<char[], void(*)(char *)>{data, [](char *) {}}, len);
         auto listener = [ptr = this->shared_from_this()](const auto &event, const auto &) {
             ptr->publish(event);
         };
 
         req->template once<ErrorEvent>(listener);
         req->template once<WriteEvent>(listener);
-        req->write(this->template get<uv_stream_t>(), this->template get<uv_stream_t>(send));*/
+        req->write(this->template get<uv_stream_t>(), this->template get<uv_stream_t>(send));
     }
 
     /**
