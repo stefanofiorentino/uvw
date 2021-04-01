@@ -10,7 +10,6 @@
 
 namespace uvw {
 
-
 /**
  * @brief Common class for almost all the resources available in `uvw`.
  *

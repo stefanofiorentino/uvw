@@ -11,6 +11,7 @@
 #include <memory>
 #include <list>
 #include <uv.h>
+#include "event_type.h"
 
 
 namespace uvw {
@@ -22,6 +23,8 @@ namespace uvw {
  * Custom wrapper around error constants of `libuv`.
  */
 struct ErrorEvent {
+    static const event_type et{event_type::error};
+
     template<typename U, typename = std::enable_if_t<std::is_integral_v<U>>>
     explicit ErrorEvent(U val) noexcept
         : ec{static_cast<int>(val)}
@@ -157,20 +160,9 @@ class Emitter {
         ListenerList onL{};
     };
 
-    static std::size_t next_type() noexcept {
-        static std::size_t counter = 0;
-        return counter++;
-    }
-
-    template<typename>
-    static std::size_t event_type() noexcept {
-        static std::size_t value = next_type();
-        return value;
-    }
-
     template<typename E>
     Handler<E> & handler() noexcept {
-        std::size_t type = event_type<E>();
+        std::size_t type{E::et};
 
         if(!(type < handlers.size())) {
             handlers.resize(type+1);
@@ -292,7 +284,7 @@ public:
      */
     template<typename E>
     bool empty() const noexcept {
-        std::size_t type = event_type<E>();
+        std::size_t type{E::et};
 
         return (!(type < handlers.size()) ||
                 !handlers[type] ||
