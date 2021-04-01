@@ -8,9 +8,11 @@
 #include <utility>
 #include <cstddef>
 #include <vector>
+#include <unordered_map>
 #include <memory>
 #include <list>
 #include <uv.h>
+#include "event_type.h"
 
 
 namespace uvw {
@@ -22,6 +24,8 @@ namespace uvw {
  * Custom wrapper around error constants of `libuv`.
  */
 struct ErrorEvent {
+    static const event_type et{event_type::error};
+
     template<typename U, typename = std::enable_if_t<std::is_integral_v<U>>>
     explicit ErrorEvent(U val) noexcept
         : ec{static_cast<int>(val)}
@@ -157,26 +161,11 @@ class Emitter {
         ListenerList onL{};
     };
 
-    static std::size_t next_type() noexcept {
-        static std::size_t counter = 0;
-        return counter++;
-    }
-
-    template<typename>
-    static std::size_t event_type() noexcept {
-        static std::size_t value = next_type();
-        return value;
-    }
-
     template<typename E>
     Handler<E> & handler() noexcept {
-        std::size_t type = event_type<E>();
+        auto type = event_type<E>();
 
-        if(!(type < handlers.size())) {
-            handlers.resize(type+1);
-        }
-
-        if(!handlers[type]) {
+        if(0==handlers.count(type)) {
            handlers[type] = std::make_unique<Handler<E>>();
         }
 
@@ -285,6 +274,12 @@ public:
                       [](auto &&hdlr){ if(hdlr) { hdlr->clear(); } });
     }
 
+    template<typename E>
+    std::string event_type()
+    {
+        return __FUNCSIG__;
+    }
+
     /**
      * @brief Checks if there are listeners registered for the specific event.
      * @return True if there are no listeners registered for the specific event,
@@ -292,10 +287,9 @@ public:
      */
     template<typename E>
     bool empty() const noexcept {
-        std::size_t type = event_type<E>();
+        auto type = event_type<E>();
 
-        return (!(type < handlers.size()) ||
-                !handlers[type] ||
+        return (0==handlers.count(type) ||
                 static_cast<Handler<E>&>(*handlers[type]).empty());
     }
 
@@ -310,7 +304,7 @@ public:
     }
 
 private:
-    std::vector<std::unique_ptr<BaseHandler>> handlers{};
+    std::unordered_map<std::string, std::unique_ptr<BaseHandler>> handlers{};
 };
 
 

@@ -8,17 +8,19 @@
 #include <uv.h>
 #include "resource.hpp"
 #include "util.h"
+#include "event_type.h"
 
 
 namespace uvw {
-
 
 /**
  * @brief CloseEvent event.
  *
  * It will be emitted by the handles according with their functionalities.
  */
-struct CloseEvent {};
+struct CloseEvent {
+	static const event_type et{event_type::close};
+};
 
 
 /**
